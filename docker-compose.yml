@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  database_pizzaria:
+    image: postgres
+    container_name: database_pizzaria
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=pizzaria
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  app:
+    build: .
+    container_name: pizzaria
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/usr/app
+    links:
+      - database_pizzaria
+    depends_on:
+      - database_pizzaria
+
+volumes:
+  pgdata:
+    driver: local

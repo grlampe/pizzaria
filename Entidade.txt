@@ -1,0 +1,33 @@
+Cliente = {
+  id: uuid,
+  user: string,
+  name: string,
+  password: string,
+  address: string, //pode ser mais de 1?
+  createdAt: date,
+  updatedAt: date,
+}
+
+Products = {
+  id: uuid,
+  name: string,
+  price: number,
+  createdAt: date,
+  updatedAt: date,
+}
+
+Order = {
+  id: uuid
+  clientId: uuid,
+  addressId: string, // se for mais de 1
+  Products: [{
+    productId: uuid,
+    name: string,
+    price: number,
+    qtd: number,
+    total: number,
+  }]
+  closed: boolean,
+  createdAt: date,
+  updatedAt: date,
+}
