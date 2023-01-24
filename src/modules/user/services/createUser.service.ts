@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { hash } from 'bcrypt';
 import { User } from '../models/user';
 import { UserRepository } from '../repositories/user.repository';
 
@@ -23,7 +24,7 @@ export class CreateUserService {
     const user = new User({
       name,
       email,
-      password,
+      password: await hash(password, 8),
       fullAddress,
     });
 
