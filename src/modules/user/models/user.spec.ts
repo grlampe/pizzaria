@@ -14,5 +14,7 @@ describe('User', () => {
     expect(user.email).toEqual('user@example.com');
     expect(user.fullAddress).toEqual('Test Street 1245');
     expect(user.password).toEqual('password');
+    expect(user.createdAt).toEqual(expect.any(Date));
+    expect(user.id).toEqual(expect.any(String));
   });
 });

@@ -13,8 +13,8 @@ export class User {
   private _id: string;
   private props: UserProps;
 
-  constructor(props: Replace<UserProps, { createdAt?: Date }>) {
-    this._id = randomUUID();
+  constructor(props: Replace<UserProps, { createdAt?: Date }>, id?: string) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),

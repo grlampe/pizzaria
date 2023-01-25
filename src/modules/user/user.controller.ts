@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateUserBody } from './dto/createUserBody';
 import { CreateUserService } from './services/createUser.service';
+import { UserViewModel } from './view-models/user-view.model';
 
 @Controller('user')
 export class UserController {
@@ -17,6 +18,8 @@ export class UserController {
       fullAddress,
     });
 
-    return { user };
+    return {
+      user: UserViewModel.toHTTP(user),
+    };
   }
 }
