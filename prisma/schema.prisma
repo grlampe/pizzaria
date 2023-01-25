@@ -21,13 +21,15 @@ model User {
 }
 
 model Address {
-  id              String   @id
-  user            User     @relation(fields: [userID], references: [id])
-  userID          String
-  street          String
-  number          String
-  zipCode         String
-  complement      String
-  deliveryAddress Boolean  @default(true)
-  createdAt       DateTime @default(now())
+  id         String   @id
+  user       User     @relation(fields: [userID], references: [id])
+  userID     String
+  street     String
+  number     Int
+  zipCode    String
+  complement String
+  state      String
+  country    String
+  city       String
+  createdAt  DateTime @default(now())
 }
