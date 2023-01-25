@@ -4,7 +4,7 @@ import { UserRepository } from '../../src/modules/user/repositories/user.reposit
 export class InMemoryUserRepository implements UserRepository {
   public users: User[] = [];
 
-  private static INSTANTE: InMemoryUserRepository;
+  private static INSTANCE: InMemoryUserRepository;
 
   async create(user: User): Promise<void> {
     this.users.push(user);
@@ -21,10 +21,10 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   public static getInstance(): InMemoryUserRepository {
-    if (!InMemoryUserRepository.INSTANTE) {
+    if (!InMemoryUserRepository.INSTANCE) {
       return new InMemoryUserRepository();
     }
 
-    return InMemoryUserRepository.INSTANTE;
+    return InMemoryUserRepository.INSTANCE;
   }
 }

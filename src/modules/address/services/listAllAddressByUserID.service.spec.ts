@@ -29,6 +29,6 @@ describe('ListAllAddressByUserIDService', () => {
     });
 
     expect(address).toHaveLength(1);
-    expect(address).toEqual(address);
+    expect(address[0]).toEqual(newAddress);
   });
 });
