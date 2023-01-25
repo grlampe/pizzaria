@@ -17,4 +17,8 @@ export class InMemoryAddressRepository implements AddressRepository {
 
     return InMemoryAddressRepository.INSTANTE;
   }
+
+  async findAllByUserID(userID: string): Promise<Address[]> {
+    return this.address.filter((a) => a.userID === userID);
+  }
 }

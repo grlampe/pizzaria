@@ -1,4 +1,4 @@
-import { Address as RawAddress } from '@prisma/client';
+import * as client from '@prisma/client';
 import { Address } from '../../../modules/Address/models/address';
 
 export class PrismaAddressMapper {
@@ -17,7 +17,7 @@ export class PrismaAddressMapper {
     };
   }
 
-  static toDomain(raw: RawAddress): Address {
+  static toDomain(raw: client.Address): Address {
     return new Address(
       {
         userID: raw.userID,
@@ -32,5 +32,9 @@ export class PrismaAddressMapper {
       },
       raw.id,
     );
+  }
+
+  static toListDomain(rawList: client.Address[]) {
+    return rawList.map((r) => PrismaAddressMapper.toDomain(r));
   }
 }

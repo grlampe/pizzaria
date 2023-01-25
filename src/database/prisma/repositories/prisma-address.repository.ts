@@ -6,13 +6,20 @@ import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class PrismaAddressRepository implements AddressRepository {
-  constructor(private prismaService: PrismaService) {}
-
   async create(address: Address): Promise<void> {
     const raw = PrismaAddressMapper.toPrisma(address);
 
     await this.prismaService.address.create({
       data: raw,
     });
+  }
+
+  constructor(private prismaService: PrismaService) {}
+  async findAllByUserID(userID: string): Promise<Address[]> {
+    const result = await this.prismaService.address.findMany({
+      where: { userID: userID },
+    });
+
+    return PrismaAddressMapper.toListDomain(result);
   }
 }

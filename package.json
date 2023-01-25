@@ -1,8 +1,8 @@
 {
   "name": "pizzaria",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Pizzaria Basic API",
+  "author": "Gabriel Rodrigo Lampe",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

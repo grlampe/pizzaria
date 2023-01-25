@@ -72,12 +72,12 @@ describe('validateUser', () => {
     const user = new User({
       name: 'User Name',
       email: 'user@example.com',
-      password: hashSync('test pass', 8),
+      password: 'test pass',
     });
 
     await repository.create(user);
 
-    const res = await service.validateUser(user.email, user.password);
+    const res = await service.validateUser(user.email, 'test pass');
 
     expect(res._id).toEqual(user.id);
   });
