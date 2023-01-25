@@ -9,7 +9,7 @@ describe('Create User Service', () => {
     const { user } = await createUserService.execute({
       name: 'User Name',
       email: 'user@example.com',
-      password: 'password',
+      password: 'test pass',
       fullAddress: 'Address Street',
     });
 
