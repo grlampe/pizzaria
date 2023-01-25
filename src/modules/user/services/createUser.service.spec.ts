@@ -3,7 +3,7 @@ import { CreateUserService } from './createUser.service';
 
 describe('Create User Service', () => {
   it('should be able to create a User', async () => {
-    const userRepository = new InMemoryUserRepository();
+    const userRepository = InMemoryUserRepository.getInstance();
     const createUserService = new CreateUserService(userRepository);
 
     const { user } = await createUserService.execute({

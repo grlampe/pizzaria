@@ -4,6 +4,8 @@ import { UserRepository } from '../../src/modules/user/repositories/user.reposit
 export class InMemoryUserRepository implements UserRepository {
   public users: User[] = [];
 
+  private static INSTANTE: InMemoryUserRepository;
+
   async create(user: User): Promise<void> {
     this.users.push(user);
   }
@@ -16,5 +18,13 @@ export class InMemoryUserRepository implements UserRepository {
     }
 
     return user;
+  }
+
+  public static getInstance(): InMemoryUserRepository {
+    if (!InMemoryUserRepository.INSTANTE) {
+      return new InMemoryUserRepository();
+    }
+
+    return InMemoryUserRepository.INSTANTE;
   }
 }

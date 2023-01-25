@@ -4,7 +4,7 @@ import { CreateAddressService } from './createAddress.service';
 
 describe('Create Address Service', () => {
   it('should be able to create a Address', async () => {
-    const addressRepository = new InMemoryAddressRepository();
+    const addressRepository = InMemoryAddressRepository.getInstance();
     const createAddressService = new CreateAddressService(addressRepository);
 
     const { address } = await createAddressService.execute({
