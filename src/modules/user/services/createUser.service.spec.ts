@@ -10,7 +10,6 @@ describe('Create User Service', () => {
       name: 'User Name',
       email: 'user@example.com',
       password: 'test pass',
-      fullAddress: 'Address Street',
     });
 
     expect(userRepository.users).toHaveLength(1);

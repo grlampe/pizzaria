@@ -5,7 +5,6 @@ export class UserViewModel {
     return {
       id: user.id,
       name: user.name,
-      fullAddress: user.fullAddress,
       createdAt: user.createdAt,
     };
   }

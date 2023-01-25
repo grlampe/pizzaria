@@ -9,7 +9,4 @@ export class CreateUserBody {
 
   @IsNotEmpty()
   password: string;
-
-  @IsNotEmpty()
-  fullAddress: string;
 }

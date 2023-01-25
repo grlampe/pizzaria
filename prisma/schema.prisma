@@ -12,10 +12,22 @@ datasource db {
 }
 
 model User {
-  id          String   @id
-  name        String
-  email       String
-  password    String
-  fullAddress String
-  createdAt   DateTime @default(now())
+  id        String    @id
+  name      String
+  email     String
+  password  String
+  createdAt DateTime  @default(now())
+  Address   Address[]
+}
+
+model Address {
+  id              String   @id
+  user            User     @relation(fields: [userID], references: [id])
+  userID          String
+  street          String
+  number          String
+  zipCode         String
+  complement      String
+  deliveryAddress Boolean  @default(true)
+  createdAt       DateTime @default(now())
 }

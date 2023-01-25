@@ -7,7 +7,6 @@ interface CreateUserRequest {
   name: string;
   email: string;
   password: string;
-  fullAddress: string;
 }
 
 interface CreateUserResponse {
@@ -19,13 +18,12 @@ export class CreateUserService {
   constructor(private userRepository: UserRepository) {}
 
   async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
-    const { name, email, password, fullAddress } = request;
+    const { name, email, password } = request;
 
     const user = new User({
       name,
       email,
       password: await hash(password, 8),
-      fullAddress,
     });
 
     await this.userRepository.create(user);

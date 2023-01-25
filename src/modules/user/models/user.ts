@@ -5,7 +5,6 @@ export interface UserProps {
   name: string;
   email: string;
   password: string;
-  fullAddress: string;
   createdAt: Date;
 }
 
@@ -47,14 +46,6 @@ export class User {
 
   public get password(): string {
     return this.props.password;
-  }
-
-  public set fullAddress(fullAddress: string) {
-    this.props.fullAddress = fullAddress;
-  }
-
-  public get fullAddress(): string {
-    return this.props.fullAddress;
   }
 
   public get createdAt(): Date {
