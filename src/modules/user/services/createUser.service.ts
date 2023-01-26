@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { hash } from 'bcryptjs';
 import { User } from '../models/user';
 import { UserRepository } from '../repositories/user.repository';
@@ -19,6 +19,12 @@ export class CreateUserService {
 
   async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
     const { name, email, password } = request;
+
+    const findUser = await this.userRepository.findByEmail(email);
+
+    if (findUser) {
+      throw new BadRequestException('User Already Exists!');
+    }
 
     const user = new User({
       name,
