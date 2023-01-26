@@ -5,7 +5,6 @@ import { hashSync } from 'bcryptjs';
 import { InMemoryUserRepository } from '../../../../test/repositories/in-memory-userRepository';
 import { User } from '../../user/models/user';
 import { UserRepository } from '../../user/repositories/user.repository';
-import { UserModule } from '../../user/user.module';
 import { jwtConstants } from '../constants';
 import { JwtStrategy } from '../strategies/jwt.strategy';
 import { LocalStrategy } from '../strategies/local.strategy';
@@ -13,7 +12,8 @@ import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
-
+  const repository: InMemoryUserRepository =
+    InMemoryUserRepository.getInstance();
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [
@@ -29,11 +29,10 @@ describe('AuthService', () => {
         JwtStrategy,
         {
           provide: UserRepository,
-          useClass: InMemoryUserRepository,
+          useValue: repository,
         },
       ],
     }).compile();
-
     service = moduleRef.get<AuthService>(AuthService);
   });
 
@@ -43,9 +42,8 @@ describe('AuthService', () => {
 });
 
 let service: AuthService;
+const repository: InMemoryUserRepository = InMemoryUserRepository.getInstance();
 describe('validateUser', () => {
-  const repository: InMemoryUserRepository =
-    InMemoryUserRepository.getInstance();
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [
@@ -90,12 +88,12 @@ describe('validateUser', () => {
 
 describe('validateLogin', () => {
   let service: AuthService;
-  let repository: InMemoryUserRepository;
+  const repository: InMemoryUserRepository =
+    InMemoryUserRepository.getInstance();
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [
-        UserModule,
         PassportModule,
         JwtModule.register({
           secret: jwtConstants.secret,
@@ -108,11 +106,10 @@ describe('validateLogin', () => {
         JwtStrategy,
         {
           provide: UserRepository,
-          useClass: InMemoryUserRepository,
+          useValue: repository,
         },
       ],
     }).compile();
-    repository = moduleRef.get(UserRepository);
     service = moduleRef.get<AuthService>(AuthService);
   });
 
