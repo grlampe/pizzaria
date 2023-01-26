@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Address } from '../models/address';
 import { AddressRepository } from '../repositories/address.repository';
 
@@ -32,6 +32,21 @@ export class CreateAddressService {
       country,
       city,
     } = request;
+
+    const findAddress = await this.addressRepository.findAddressByAllFields({
+      userID,
+      street,
+      number,
+      zipCode,
+      complement,
+      state,
+      country,
+      city,
+    });
+
+    if (findAddress) {
+      throw new BadRequestException('Address Already Exists!');
+    }
 
     const address = new Address({
       userID,

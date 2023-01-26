@@ -15,10 +15,14 @@ export class PrismaOrderRepository implements OrderRepository {
   }
 
   constructor(private prismaService: PrismaService) {}
-  async findAllByUserID(userID: string): Promise<Order[]> {
+  async findAllByUserID(userID: string): Promise<Order[] | null> {
     const result = await this.prismaService.order.findMany({
       where: { userID: userID },
     });
+
+    if (result.length === 0) {
+      return null;
+    }
 
     return PrismaOrderMapper.toListDomain(result);
   }
