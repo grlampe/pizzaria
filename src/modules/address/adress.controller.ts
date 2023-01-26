@@ -40,9 +40,9 @@ export class AddressController {
   async findAllByUserID(@Req() req) {
     const { userID } = req.user;
 
-    const { address } = await this.listAllAddressByUserIDService.execute(
+    const { address } = await this.listAllAddressByUserIDService.execute({
       userID,
-    );
+    });
 
     return {
       addressList: AddressViewModel.toListHTTP(address),
