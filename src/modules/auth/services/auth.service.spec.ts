@@ -39,32 +39,6 @@ describe('AuthService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-});
-
-let service: AuthService;
-const repository: InMemoryUserRepository = InMemoryUserRepository.getInstance();
-describe('validateUser', () => {
-  beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [
-        PassportModule,
-        JwtModule.register({
-          secret: jwtConstants.secret,
-          signOptions: { expiresIn: '1d' },
-        }),
-      ],
-      providers: [
-        AuthService,
-        LocalStrategy,
-        JwtStrategy,
-        {
-          provide: UserRepository,
-          useValue: repository,
-        },
-      ],
-    }).compile();
-    service = moduleRef.get<AuthService>(AuthService);
-  });
 
   it('should return a user object when credentials are valid', async () => {
     const user = new User({
@@ -83,34 +57,6 @@ describe('validateUser', () => {
   it('should return null when credentials are invalid', async () => {
     const res = await service.validateUser('xxx', 'xxx');
     expect(res).toBeNull();
-  });
-});
-
-describe('validateLogin', () => {
-  let service: AuthService;
-  const repository: InMemoryUserRepository =
-    InMemoryUserRepository.getInstance();
-
-  beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [
-        PassportModule,
-        JwtModule.register({
-          secret: jwtConstants.secret,
-          signOptions: { expiresIn: '1d' },
-        }),
-      ],
-      providers: [
-        AuthService,
-        LocalStrategy,
-        JwtStrategy,
-        {
-          provide: UserRepository,
-          useValue: repository,
-        },
-      ],
-    }).compile();
-    service = moduleRef.get<AuthService>(AuthService);
   });
 
   it('should return JWT object when credentials are valid', async () => {
