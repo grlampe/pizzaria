@@ -10,6 +10,10 @@ export class OrderViewModel {
   }
 
   static toListHTTP(orders: Order[]) {
+    if (!orders) {
+      return [];
+    }
+
     return [orders.map((o) => OrderViewModel.toHTTP(o))];
   }
 }
