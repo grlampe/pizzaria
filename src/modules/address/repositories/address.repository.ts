@@ -9,4 +9,6 @@ export abstract class AddressRepository {
   abstract findAddressByAllFields(
     data: OptionsFindAddressByAllFields,
   ): Promise<Address | null>;
+
+  abstract findByID(id: string): Promise<Address | null>;
 }

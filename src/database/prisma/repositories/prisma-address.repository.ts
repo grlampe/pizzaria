@@ -40,11 +40,27 @@ export class PrismaAddressRepository implements AddressRepository {
     return PrismaAddressMapper.toDomain(result);
   }
 
-  async findAllByUserID(userID: string): Promise<Address[]> {
+  async findAllByUserID(userID: string): Promise<Address[] | null> {
     const result = await this.prismaService.address.findMany({
       where: { userID: userID },
     });
 
+    if (!result) {
+      return null;
+    }
+
     return PrismaAddressMapper.toListDomain(result);
+  }
+
+  async findByID(id: string): Promise<Address | null> {
+    const result = await this.prismaService.address.findUnique({
+      where: { id: id },
+    });
+
+    if (!result) {
+      return null;
+    }
+
+    return PrismaAddressMapper.toDomain(result);
   }
 }
