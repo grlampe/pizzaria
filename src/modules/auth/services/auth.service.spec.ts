@@ -126,4 +126,18 @@ describe('validateLogin', () => {
 
     expect(res.access_token).toBeDefined();
   });
+
+  it('should return JWT object when credentials are valid', async () => {
+    const user: User = new User({
+      name: 'User Name',
+      email: 'user@example.com',
+      password: hashSync('test pass', 8),
+    });
+
+    await repository.create(user);
+
+    const res = await service.login(user);
+
+    expect(res.access_token).toBeDefined();
+  });
 });

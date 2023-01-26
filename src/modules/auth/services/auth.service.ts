@@ -12,6 +12,7 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     let passwordMatch = false;
+
     const user = await this.userRepository.findByEmail(username);
 
     if (!user) {

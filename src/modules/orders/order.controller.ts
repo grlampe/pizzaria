@@ -34,7 +34,9 @@ export class OrderController {
   async findAllByUserID(@Req() req) {
     const { userID } = req.user;
 
-    const { orders } = await this.listAllOrdersByUserIDService.execute(userID);
+    const { orders } = await this.listAllOrdersByUserIDService.execute({
+      userID,
+    });
 
     return {
       ordersList: OrderViewModel.toListHTTP(orders),
